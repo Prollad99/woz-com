@@ -1,31 +1,20 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>{{ .Title }}</title>
-</head>
-<body>
-    {{ define "main" }}
-        <main class="content">
-            <!-- Display the content of _index.md -->
-            <div class="homepage-content">
-                {{ .Content }}
-            </div>
-            
-            <!-- Display a list of all posts -->
-            <div class="post-list">
-                <h2>All Posts</h2>
-                <ul>
-                    {{ range .Site.RegularPages }}
-                        {{ if eq .Section "posts" }}
-                            <li>
-                                <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                            </li>
-                        {{ end }}
-                    {{ end }}
-                </ul>
-            </div>
-        </main>
-    {{ end }}
-</body>
-</html>
+{{ define "main" }}
+    <main class="content">
+        <!-- Display the content of _index.md -->
+        <div class="homepage-content">
+            {{ .Content }}
+        </div>
+        
+        <!-- Display a list of all posts -->
+        <div class="post-list">
+            <h2>All Posts</h2>
+            <ul>
+                {{ range .Site.RegularPages }}
+                    <li>
+                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                    </li>
+                {{ end }}
+            </ul>
+        </div>
+    </main>
+{{ end }}
