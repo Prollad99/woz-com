@@ -1,6 +1,3 @@
 baseURL = "http://www.wizardofozfreecoins.com/"
 languageCode = "en-us"
 title = "Wizard of Oz Free Coins"
-
-[permalinks]
-post = "/:slug/"
