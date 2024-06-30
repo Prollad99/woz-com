@@ -1,10 +1,33 @@
 <header>
-    <h1>{{ .Site.Title }}</h1>
-    <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about/">About</a></li>
-            <li><a href="/posts/">Posts</a></li>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="{{ .Site.BaseURL }}"><i class="bi bi-gift-fill"></i> <b>Wizard of Oz Free Coins</b></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDarkDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ .Site.BaseURL }}"><i class="bi bi-house-fill"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ .Site.BaseURL }}/about/">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ .Site.BaseURL }}/contact/">Contact</a>
+          </li>
+          <li class="nav-item dropdown">
+            <button class="nav-link dropdown-toggle border-0 bg-transparent" type="button" id="navbarDarkDropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              More
+            </button>
+            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+              <li><a class="dropdown-item" href="{{ .Site.BaseURL }}/privacy-policy/">Privacy Policy</a></li>
+              <li><a class="dropdown-item" href="{{ .Site.BaseURL }}/disclaimer/">Disclaimer</a></li>
+              <li><a class="dropdown-item" href="{{ .Site.BaseURL }}/dmca/">DMCA</a></li>
+            </ul>
+          </li>
         </ul>
-    </nav>
+      </div>
+    </div>
+  </nav>
 </header>
