@@ -8,7 +8,8 @@
         <!-- Display a list of all posts -->
         <div class="post-list">
             <h2>All Posts</h2>
-            <ul>                       {{ range .Site.RegularPages }}
+            <ul>
+{{ range where .Site.RegularPages "Type" "post" }}
                     <li>
                         <a href="{{ .RelPermalink }}">{{ .Title }}</a>
                     </li>
