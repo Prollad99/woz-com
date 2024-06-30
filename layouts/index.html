@@ -1,18 +1,4 @@
 {{ define "main" }}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ .Site.Title }}</title>
-</head>
-<body>
-    {{ partial "header.html" . }}
-    <main>
-        <h1>Welcome to {{ .Site.Title }}</h1>
-        <p>This is the homepage of my Hugo site.</p>
-    </main>
-    {{ partial "footer.html" . }}
-</body>
-</html>
+    <h1>Welcome to {{ .Site.Title }}</h1>
+    <p>This is the homepage of my Hugo site.</p>
 {{ end }}
