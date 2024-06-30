@@ -1,14 +1,12 @@
 {{ define "main" }}
+<main>
+    <h2>Latest Posts</h2>
+    <ul>
         {{ range .Site.RegularPages }}
             {{ if eq .Type "post" }}
-<h2>Latest Posts</h2>
-        <ul>
-            {{ range .Site.RegularPages }}
-                {{ if eq .Type "post" }}
-                    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-                {{ end }}
+                <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
             {{ end }}
-        </ul>
-{{ end }}
-{{ end }}
+        {{ end }}
+    </ul>
+</main>
 {{ end }}
