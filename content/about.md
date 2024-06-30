@@ -4,7 +4,7 @@ date: 2024-06-24
 author: "Tagesbonus.de"
 draft: false
 slug: "about"
-excludeFromHomePage: true
+excludeFromHome = true
 type: "page"
 ---
 
