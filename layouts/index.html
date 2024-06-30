@@ -1,5 +1,6 @@
 {{ define "main" }}
-<main>
+        {{ range .Site.RegularPages }}
+            {{ if eq .Type "post" }}
 <h2>Latest Posts</h2>
         <ul>
             {{ range .Site.RegularPages }}
@@ -8,5 +9,6 @@
                 {{ end }}
             {{ end }}
         </ul>
-</main>
+{{ end }}
+{{ end }}
 {{ end }}
