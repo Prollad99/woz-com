@@ -1,21 +1,25 @@
 {{ define "main" }}
-    <main class="content">
+    <main class="container">
         <!-- Display the content of _index.md -->
-        <div class="homepage-content">
-            {{ .Content }}
+        <div class="row">
+            <div class="col">
+                {{ .Content }}
+            </div>
         </div>
-        
+
         <!-- Display a list of all posts -->
-        <div class="post-list">
-            <h2>All Posts</h2>
-            <ul>
-{{ $pages := where .Site.RegularPages "Params.excludeFromHome" "ne" true }}
-{{ range $pages }}
-                    <li>
-                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                    </li>
-                {{ end }}
-            </ul>
+        <div class="row">
+            <div class="col">
+                <h2>All Posts</h2>
+                <ul class="list-group">
+                    {{ $pages := where .Site.RegularPages "Params.excludeFromHome" "ne" true }}
+                    {{ range $pages }}
+                        <li class="list-group-item">
+                            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                        </li>
+                    {{ end }}
+                </ul>
+            </div>
         </div>
     </main>
 {{ end }}
