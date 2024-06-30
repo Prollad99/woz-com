@@ -8,7 +8,6 @@ excludeFromHome = true
 type: "page"
 ---
 
-
 Willkommen bei **Tagesbonus.de**!
 
 ## Wer wir sind
