@@ -7,11 +7,10 @@
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <!-- Other CSS files -->
-  <link href="{{ "css/styles.css" | relURL }}" rel="stylesheet">
-  {{ partial "head_custom.html" . }}
+  <link href="{{ "css/main.css" | relURL }}" rel="stylesheet">
+  {{ partial "header.html" . }}
 </head>
 <body>
-  {{ partial "navbar.html" . }}
   
   <div class="container">
     {{ block "main" . }}{{ end }}
