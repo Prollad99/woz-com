@@ -1,3 +1,9 @@
-<footer>
-    <p>&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
+<footer class="bg-dark text-white py-4">
+  <div class="container text-center">
+    <p>Copyright &copy; <script type='text/javascript'>document.write(new Date().getFullYear())</script> | <a href="{{ .Site.BaseURL }}">Wizard of Oz Free Coins</a>. All Rights Reserved.</p>
+    <p>
+      <a href="{{ .Site.BaseURL }}/about" class="text-white">About</a> |
+      <a href="{{ .Site.BaseURL }}/contact/" class="text-white">Contact</a>
+    </p>
+  </div>
 </footer>
