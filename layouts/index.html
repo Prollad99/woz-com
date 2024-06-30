@@ -6,7 +6,11 @@
     <title>{{ .Site.Title }}</title>
 </head>
 <body>
-    <h1>Welcome to {{ .Site.Title }}</h1>
-    <p>This is the homepage of my Hugo site.</p>
+    {{ partial "header.html" . }}
+    <main>
+        <h1>Welcome to {{ .Site.Title }}</h1>
+        <p>This is the homepage of my Hugo site.</p>
+    </main>
+    {{ partial "footer.html" . }}
 </body>
 </html>
