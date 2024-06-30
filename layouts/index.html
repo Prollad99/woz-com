@@ -9,12 +9,10 @@
         <div class="post-list">
             <h2>All Posts</h2>
             <ul>                       {{ range .Site.RegularPages }}
-            {{ if eq .Type "post" }}
                     <li>
                         <a href="{{ .RelPermalink }}">{{ .Title }}</a>
                     </li>
                 {{ end }}
-{{ end }}
             </ul>
         </div>
     </main>
