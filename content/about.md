@@ -4,7 +4,7 @@ date: 2024-06-24
 author: "Tagesbonus.de"
 draft: false
 slug: "about"
-excludeFromHome = true
+excludeFromHome: true  # Note the colon (:) here
 type: "page"
 ---
 
