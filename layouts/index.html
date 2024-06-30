@@ -9,7 +9,8 @@
         <div class="post-list">
             <h2>All Posts</h2>
             <ul>
-{{ range .Site.RegularPages }}
+{{ $pages := where .Site.RegularPages "Params.excludeFromHome" "ne" true }}
+{{ range $pages }}
                     <li>
                         <a href="{{ .RelPermalink }}">{{ .Title }}</a>
                     </li>
