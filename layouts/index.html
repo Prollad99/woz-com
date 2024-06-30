@@ -1,4 +1,12 @@
 {{ define "main" }}
-    <h1>Welcome to {{ .Site.Title }}</h1>
-    <p>This is the homepage of my Hugo site.</p>
+<main>
+<h2>Latest Posts</h2>
+        <ul>
+            {{ range .Site.RegularPages }}
+                {{ if eq .Type "post" }}
+                    <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+                {{ end }}
+            {{ end }}
+        </ul>
+</main>
 {{ end }}
