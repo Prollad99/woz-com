@@ -3,6 +3,7 @@ title: "Daily Wizard of Oz Free Coins - Collect Your Rewards Now"
 description: "Collect your daily Wizard of Oz free coins on wizardofozfreecoins.com. Get the latest and most reliable links to free coins and enjoy your favorite slot game without spending real money."
 keywords: ["Wizard of Oz free coins", "daily rewards", "free coins Wizard of Oz", "bonus links", "slots free coins"]
 summary: "Get your daily Wizard of Oz free coins from wizardofozfreecoins.com. Click here for the latest updates and enjoy uninterrupted gameplay with our verified and safe links."
+date: 2024-07-01
 type: "homepage"
 ---
 
