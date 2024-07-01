@@ -61,3 +61,5 @@ Wizard of Oz Slots offers an engaging and potentially rewarding experience for b
 ---
 
 This guide provides a comprehensive overview to get you started and improve your gameplay in Wizard of Oz Slots. Enjoy your adventure through the magical world of Oz and may the odds be ever in your favor!
+
+For more tips and free coins, visit [Wizard of Oz Free Coins](https://www.wizardofozfreecoins.com).
