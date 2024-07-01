@@ -1,6 +1,12 @@
 {{ define "main" }}
 <div class="container mt-4">
     <h2 class="mb-4">Tag: {{ .Title }}</h2>
+<p class="post-meta text-secondary mt-2">
+        <span class="post-date">Published on {{ .Date.Format "2 January 2006" }}</span>
+        {{ if .Params.author }}
+            <span class="post-author">by {{ .Params.author }}</span>
+        {{ end }}
+</p>
     <div class="row">
         {{ range .Pages }}
             <div class="col-md-6 mb-4">
