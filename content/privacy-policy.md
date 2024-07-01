@@ -4,7 +4,7 @@ date: 2024-07-01
 author: "Tagesbonus.de"
 draft: false
 slug: "privacy-policy"
-excludeFromHomePage: true
+excludeFromHome: true
 type: "page"
 ---
 
