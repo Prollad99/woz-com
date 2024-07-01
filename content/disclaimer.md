@@ -1,7 +1,7 @@
 ---
 title: "Disclaimer"
 date: 2024-07-01
-author: "Tagesbonus.de"
+author: "Prollad"
 draft: false
 slug: "disclaimer"
 excludeFromHome: true
