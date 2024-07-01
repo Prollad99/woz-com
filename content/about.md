@@ -7,6 +7,7 @@ slug: "about"
 excludeFromHome: true
 type: "page"
 ---
+
 Welcome to my site dedicated to the Wizard of Oz slots game. My name is Prollad Mondal and I'm an avid fan of this fun and engaging slot machine app.
 
 ## About Me
