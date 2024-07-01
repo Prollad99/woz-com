@@ -15,7 +15,7 @@ Wizard of oz fun free coins are first shared on this website which we collect fr
 
 Wizard of Oz Free Coins are promotional rewards that players can earn to enrich their gameplay in the Wizard of Oz Slots mobile game. These rewards are typically provided by the game developers. Players can receive benefits like extra coins, free spins, or unique in-game items by clicking valid reward links. These rewards allow players to extend their gameplay and possibly enhance their chances of winning.
 
-![wizard of oz free coins](/images/wizard-of-oz-free-coins.jpeg)
+![wizard of oz free coins](static/images/wizard-of-oz-free-coins.jpeg)
 
 Free coins in Wizard of Oz are virtual currency that players can acquire without spending real money. These coins are used to play the game's slot machines and participate in various other activities. They can be earned as daily bonuses or as rewards for completing specific challenges or achievements in the game. By obtaining free coins and spins, players can keep playing even when their initial balance runs low.
 
