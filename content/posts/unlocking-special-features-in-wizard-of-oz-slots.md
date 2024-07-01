@@ -2,6 +2,7 @@
 title: "Unlocking Special Features in Wizard of Oz Slots: A Step-by-Step Guide"
 date: 2024-07-01
 draft: false
+author: "Prollad"
 slug: "unlocking-special-features-in-wizard-of-oz-slots"
 description: "Discover how to unlock and make the most of special features in the Wizard of Oz Slots game with this detailed step-by-step guide."
 tags: ["Wizard of Oz Slots", "Slots Guide", "Casino Tips", "Gaming Strategy", "Free Spins", "Online Slots"]
