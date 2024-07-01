@@ -1,7 +1,7 @@
 ---
 title: "Privacy Policy"
 date: 2024-07-01
-author: "Tagesbonus.de"
+author: "Prollad"
 draft: false
 slug: "privacy-policy"
 excludeFromHome: true
