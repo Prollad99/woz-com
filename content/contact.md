@@ -5,6 +5,7 @@ author: "Tagesbonus.de"
 draft: false
 slug: "contact"
 excludeFromHome: true
+excludeFromShare: true
 type: "page"
 ---
 
