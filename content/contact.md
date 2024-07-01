@@ -1,7 +1,7 @@
 ---
 title: "Contact Us"
 date: 2024-07-01
-author: "Tagesbonus.de"
+author: "Prollad"
 draft: false
 slug: "contact"
 excludeFromHome: true
