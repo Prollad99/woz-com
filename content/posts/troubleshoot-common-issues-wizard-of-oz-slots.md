@@ -69,7 +69,7 @@ Playing Wizard of Oz Slots can be a magical experience, but sometimes technical 
 - **Keep Your Device Updated:** Ensure your device's operating system is up-to-date to avoid compatibility issues.
 - **Regular Maintenance:** Periodically clear your device's cache and restart it to keep it running smoothly.
 
-For more detailed support, visit the [official Wizard of Oz Slots support page](https://zyngasupport.helpshift.com/hc/en/23-wizard-of-oz-slots/)&#8203;:citation[oaicite:1]{index=1}&#8203;&#8203;:citation[oaicite:0]{index=0}&#8203;. If you need free coins or credits, check out [wizardofozfreecoins.com](https://www.wizardofozfreecoins.com) for daily rewards.
+For more detailed support, visit the [official Wizard of Oz Slots support page](https://zyngasupport.helpshift.com/hc/en/23-wizard-of-oz-slots/). If you need free coins or credits, check out [wizardofozfreecoins.com](https://www.wizardofozfreecoins.com) for daily rewards.
 
 By following these troubleshooting steps, you can minimize disruptions and enjoy a smoother gaming experience with Wizard of Oz Slots.
 
