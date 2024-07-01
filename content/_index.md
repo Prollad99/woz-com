@@ -11,6 +11,10 @@ Love playing mobile games? If yes, then you must’ve undoubtedly come across [W
 
 Wizard of oz fun free coins are first shared on this website which we collect from the official social media page of Wizard of Oz Slots Games. Wizard of oz slots games post links on their social media platforms like Facebook, Twitter, Instagram daily. Visit this website daily and bookmark it so you don't miss daily updates, exciting gifts, free coins and spins.
 
+## Wizard of Oz Free Coin Links
+
+{{< include-md "static/reward.md" >}}
+
 ## What are Wizard of Oz Free Coins?
 
 Wizard of Oz Free Coins are promotional rewards that players can earn to enrich their gameplay in the Wizard of Oz Slots mobile game. These rewards are typically provided by the game developers. Players can receive benefits like extra coins, free spins, or unique in-game items by clicking valid reward links. These rewards allow players to extend their gameplay and possibly enhance their chances of winning.
