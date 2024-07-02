@@ -3,7 +3,7 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
 
-const url = 'https://techyhigher.com/wizard-of-oz-slots-free-coins/';
+const url = 'https://mosttechs.com/wizard-of-oz-slots-free-coins/';
 
 axios.get(url)
   .then(({ data }) => {
