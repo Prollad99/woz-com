@@ -13,6 +13,11 @@ title = "Wizard of Oz Free Coins"
 [permalinks]
 post = "/:slug/"
 
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
 [sitemap]
   changefreq = "daily"
   filename = "sitemap.xml"
