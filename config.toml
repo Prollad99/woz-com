@@ -9,6 +9,3 @@ title = "Wizard of Oz Free Coins"
 
 [taxonomies]
   tag = "tags"
-
-[permalinks]
-  posts = "/:slug/"
