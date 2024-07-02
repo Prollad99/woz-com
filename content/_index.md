@@ -21,7 +21,7 @@ Collecting your **Wizard of Oz free coins** is simple and straightforward. Follo
 
 ### Today's Free Coin Links
 
-{{< include-md "static/reward.md" >}}
+{{< include-md "static/rewards/wizard-of-oz.md" >}}
 
 Make sure to visit us daily for new links and more rewards!
 
