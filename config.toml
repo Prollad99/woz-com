@@ -11,4 +11,4 @@ title = "Wizard of Oz Free Coins"
   tag = "tags"
 
 [permalinks]
-  post = "/:slug/"
+  posts = "/:slug/"
