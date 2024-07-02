@@ -12,8 +12,3 @@ title = "Wizard of Oz Free Coins"
 
 [permalinks]
   post = "/:slug/"
-
-[sitemap]
-  changefreq = "daily"
-  filename = "sitemap.xml"
-  priority = 1.0
