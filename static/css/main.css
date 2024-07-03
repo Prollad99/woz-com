@@ -21,7 +21,7 @@ footer a{
 color: #cce6ff;
 }
 header a{
-text-decoration: none;
+border: none;
 }
 
 .rewards a:link {
