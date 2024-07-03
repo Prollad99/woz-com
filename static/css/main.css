@@ -20,6 +20,9 @@ background-color: transparent;
 footer a{
 color: #cce6ff;
 }
+header a{
+text-decoration: none;
+}
 
 .rewards a:link {
   color: #004d99; /* Deep blue for unvisited links */
