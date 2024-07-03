@@ -45,18 +45,30 @@ color: #cce6ff;
   text-decoration: underline;
 }
 
-/* Add this CSS to your stylesheet */
-
-.navbar-nav .nav-link.dropdown-toggle {
-    border: none;
-    background: none;
-}
-
-.navbar-nav .dropdown-menu {
-    border: none;
-}
-
+/* Reset button and dropdown styles */
+.navbar-nav .nav-link.dropdown-toggle,
+.navbar-nav .dropdown-menu,
 .navbar-nav .dropdown-item {
     border: none;
     background: none;
+}
+
+/* Reset focus and active state styles */
+.navbar-nav .nav-link.dropdown-toggle:focus,
+.navbar-nav .nav-link.dropdown-toggle:active,
+.navbar-nav .dropdown-menu:focus,
+.navbar-nav .dropdown-menu:active,
+.navbar-nav .dropdown-item:focus,
+.navbar-nav .dropdown-item:active {
+    outline: none;
+    box-shadow: none;
+    border: none;
+    background: none;
+}
+
+/* Remove outline from the button when it's active */
+.navbar-toggler:focus,
+.navbar-toggler:active {
+    outline: none;
+    box-shadow: none;
 }
