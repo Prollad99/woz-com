@@ -20,9 +20,6 @@ background-color: transparent;
 footer a{
 color: #cce6ff;
 }
-header a{
-border: none;
-}
 
 .rewards a:link {
   color: #004d99; /* Deep blue for unvisited links */
@@ -46,4 +43,20 @@ border: none;
   color: #ff4500; /* OrangeRed for active links */
   background-color: transparent;
   text-decoration: underline;
+}
+
+/* Add this CSS to your stylesheet */
+
+.navbar-nav .nav-link.dropdown-toggle {
+    border: none;
+    background: none;
+}
+
+.navbar-nav .dropdown-menu {
+    border: none;
+}
+
+.navbar-nav .dropdown-item {
+    border: none;
+    background: none;
 }
