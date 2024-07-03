@@ -72,3 +72,15 @@ color: #cce6ff;
     outline: none;
     box-shadow: none;
 }
+
+/* Set text color for dropdown menu items */
+.navbar-nav .dropdown-menu .dropdown-item {
+    color: white; /* or any color you prefer */
+}
+
+/* Ensure the hover and active states also have the correct text color */
+.navbar-nav .dropdown-menu .dropdown-item:hover,
+.navbar-nav .dropdown-menu .dropdown-item:focus,
+.navbar-nav .dropdown-menu .dropdown-item:active {
+    color: white; /* or any color you prefer */
+}
