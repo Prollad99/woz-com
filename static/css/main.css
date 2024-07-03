@@ -18,7 +18,8 @@ background-color: transparent;
   text-decoration: none;
 }
 footer a {
-  color: #B0B0B0;
+  color: #FFFFFF;
+  text-decoration: underline;
 }
 
 .rewards a:link {
