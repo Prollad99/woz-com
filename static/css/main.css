@@ -17,6 +17,9 @@ color: #004d99;
 background-color: transparent;
   text-decoration: none;
 }
+footer a{
+color: #cce6ff;
+}
 
 .rewards a:link {
   color: #004d99; /* Deep blue for unvisited links */
