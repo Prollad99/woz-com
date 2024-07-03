@@ -36,3 +36,19 @@ line-height:1.625;
   background-color: transparent;
   text-decoration: underline;
 }
+
+.custom-nav-link {
+    color: #ffffff !important; /* Ensure the link color matches the navbar text */
+  }
+
+  .custom-nav-link:hover {
+    color: #ffcc00 !important; /* Example hover color for a gaming theme */
+  }
+  
+  .custom-footer-link {
+  color: #ffffff !important; /* Ensure the link color matches the footer text */
+  }
+  
+  .custom-footer-link:hover {
+  color: #ffcc00 !important; /* Example hover color for a gaming theme */
+  }
