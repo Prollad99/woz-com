@@ -1,4 +1,16 @@
 <div class="rewards">
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1692979846">4x free credits 10.7.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1720017695-0c5shisjf6xu">4x free credits 10.7.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1719951964-0xlzxoxv6lb">4x free credits 10.7.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1719403341-0k44ij8hzhw">4x free credits 10.7.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1720172934-06jj742gpekh">4x free credits 10.7.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1719402145-0c41kdmg7avo">4x free credits 10.7.2024</a></p>
+
   <p><a href="https://zynga.social/e0a26d">4x free credits 10.7.2024</a></p>
 
   <p><a href="https://zynga.social/lt4d">4x free credits 9.7.2024</a></p>
