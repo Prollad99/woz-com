@@ -6,33 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ .Title }}</title>
     <link rel="manifest" href="/manifest.json">
+
     <script>
         let deferredPrompt;
 
         window.addEventListener('beforeinstallprompt', (e) => {
+            // Prevent the mini-infobar from appearing on mobile
             e.preventDefault();
+            // Stash the event so it can be triggered later.
             deferredPrompt = e;
-            showInstallPromotion();
+            // Optionally, log the event to the console
+            console.log('beforeinstallprompt event was fired.');
         });
 
-        function showInstallPromotion() {
-            const installButton = document.getElementById('install-button');
-            if (!window.matchMedia('(display-mode: standalone)').matches && deferredPrompt) {
-                // Show the install button if not already installed
-                installButton.style.display = 'block';
-            } else {
-                installButton.style.display = 'none';
-            }
-        }
-
-        function hideInstallPromotion() {
-            const installButton = document.getElementById('install-button');
-            installButton.style.display = 'none';
-        }
-
         window.addEventListener('appinstalled', (evt) => {
-            hideInstallPromotion();
-            deferredPrompt = null;
+            console.log('PWA was installed');
         });
 
         if ('serviceWorker' in navigator) {
@@ -44,29 +32,6 @@
                 });
             });
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const installButton = document.getElementById('install-button');
-            installButton.addEventListener('click', async () => {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-                    const { outcome } = await deferredPrompt.userChoice;
-                    if (outcome === 'accepted') {
-                        console.log('User accepted the install prompt');
-                    } else {
-                        console.log('User dismissed the install prompt');
-                    }
-                    deferredPrompt = null;
-                }
-            });
-
-            // Check the display mode on page load
-            if (window.matchMedia('(display-mode: standalone)').matches) {
-                hideInstallPromotion();
-            } else {
-                showInstallPromotion();
-            }
-        });
     </script>
 
     <link rel="preload" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" as="style">
@@ -102,9 +67,6 @@
         </ol>
     </nav>
     {{ block "main" . }}{{ end }}
-
-    <!-- Install Button -->
-    <button id="install-button" style="display: none;">Install App</button>
 
     {{ partial "footer.html" . }}
 
