@@ -16,18 +16,23 @@
         });
 
         function showInstallPromotion() {
-            if (!window.matchMedia('(display-mode: standalone)').matches) {
+            const installButton = document.getElementById('install-button');
+            if (!window.matchMedia('(display-mode: standalone)').matches && deferredPrompt) {
                 // Show the install button if not already installed
-                document.getElementById('install-button').style.display = 'block';
+                installButton.style.display = 'block';
+            } else {
+                installButton.style.display = 'none';
             }
         }
 
         function hideInstallPromotion() {
-            document.getElementById('install-button').style.display = 'none';
+            const installButton = document.getElementById('install-button');
+            installButton.style.display = 'none';
         }
 
         window.addEventListener('appinstalled', (evt) => {
             hideInstallPromotion();
+            deferredPrompt = null;
         });
 
         if ('serviceWorker' in navigator) {
@@ -55,8 +60,11 @@
                 }
             });
 
+            // Check the display mode on page load
             if (window.matchMedia('(display-mode: standalone)').matches) {
                 hideInstallPromotion();
+            } else {
+                showInstallPromotion();
             }
         });
     </script>
