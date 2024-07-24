@@ -15,12 +15,11 @@
             e.preventDefault();
             // Stash the event so it can be triggered later.
             deferredPrompt = e;
-            // Optionally, log the event to the console
             console.log('beforeinstallprompt event was fired.');
         });
 
         window.addEventListener('appinstalled', (evt) => {
-            console.log('PWA was installed');
+            console.log('WOZ Coins was installed');
         });
 
         if ('serviceWorker' in navigator) {
