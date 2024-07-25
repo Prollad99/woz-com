@@ -1,4 +1,6 @@
 <div class="rewards">
+  <p><a href="https://zynga.social/edea43">4x free credits 25.7.2024</a></p>
+
   <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1721676999-0e44v2q9zg5n">4x free credits 24.7.2024</a></p>
 
   <p><a href="https://zynga.social/nwpf">4x free credits 24.7.2024</a></p>
