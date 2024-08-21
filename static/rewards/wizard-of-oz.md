@@ -1,4 +1,12 @@
 <div class="rewards">
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1723749313-0zj6q8l3oxmq">4x free credits 21.8.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1723749313-0zj6q8l3oxmq">4x free credits 21.8.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1692979846">4x free credits 21.8.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1723749297-0gpzyb9n9cvp">4x free credits 21.8.2024</a></p>
+
   <p><a href="https://zynga.social/9965ed">4x free credits 21.8.2024</a></p>
 
   <p><a href="https://zynga.social/ylhm">4x free credits 20.8.2024</a></p>
