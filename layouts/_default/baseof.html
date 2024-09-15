@@ -41,6 +41,11 @@
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9883001954705974" crossorigin="anonymous"></script>
 
+{{- if or .Params.draft (eq .Params.noindex true) -}}
+    <meta name="robots" content="noindex, nofollow" />
+{{- else -}}
+    <meta name="robots" content="index, follow" />
+{{- end -}}
         <meta name="description" content="{{ if .IsHome }}{{ if .Params.description }}{{ .Params.description }}{{ else }}{{ .Site.Params.metaDescription }}{{ end }}{{ else if .Params.metaDescription }}{{ .Params.metaDescription }}{{ else }}{{ .Summary | plainify | htmlEscape }}{{ end }}">
 <meta property="og:title" content="{{ .Title }}">
 <meta property="og:description" content="{{ if .IsHome }}{{ if .Params.description }}{{ .Params.description }}{{ else }}{{ .Site.Params.metaDescription }}{{ end }}{{ else if .Params.metaDescription }}{{ .Params.metaDescription }}{{ else }}{{ .Summary | plainify | htmlEscape }}{{ end }}">
