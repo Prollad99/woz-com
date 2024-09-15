@@ -41,9 +41,9 @@
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9883001954705974" crossorigin="anonymous"></script>
 
-    <meta name="description" content="{{ if .Params.metaDescription }}{{ .Params.metaDescription }}{{ else }}{{ .Summary | plainify | htmlEscape }}{{ end }}">
-    <meta property="og:title" content="{{ .Title }}">
-    <meta property="og:description" content="{{ if .Params.metaDescription }}{{ .Params.metaDescription }}{{ else }}{{ .Summary | plainify | htmlEscape }}{{ end }}">
+        <meta name="description" content="{{ if .IsHome }}{{ if .Params.description }}{{ .Params.description }}{{ else }}{{ .Site.Params.metaDescription }}{{ end }}{{ else if .Params.metaDescription }}{{ .Params.metaDescription }}{{ else }}{{ .Summary | plainify | htmlEscape }}{{ end }}">
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:description" content="{{ if .IsHome }}{{ if .Params.description }}{{ .Params.description }}{{ else }}{{ .Site.Params.metaDescription }}{{ end }}{{ else if .Params.metaDescription }}{{ .Params.metaDescription }}{{ else }}{{ .Summary | plainify | htmlEscape }}{{ end }}">
     <meta property="og:image" content="{{ if .Params.image }}{{ .Site.BaseURL }}{{ .Params.image }}{{ else }}{{ .Site.BaseURL }}/images/default-og-image.jpg{{ end }}">
     <meta property="og:url" content="{{ .Permalink }}">
     <meta property="og:type" content="article">
