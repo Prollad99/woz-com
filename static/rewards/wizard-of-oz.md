@@ -1,4 +1,20 @@
 <div class="rewards">
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1692979846">4x free credits 7.11.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1730828508-0wruya8tzsgp">4x free credits 7.11.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1730696088-0v5v0mo7gv7a">4x free credits 7.11.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1730696556-0k82b9blndzn">4x free credits 7.11.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1730696878-0cldtu1pamu">4x free credits 7.11.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1730106327-00xfu6w82o1h">4x free credits 7.11.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1730116123-05yrxqgexux">4x free credits 7.11.2024</a></p>
+
+  <p><a href="https://zdnwoz0-a.akamaihd.net/live-web/incentive_redirect.html?id=1730192564-07za4nr6dc07">4x free credits 7.11.2024</a></p>
+
   <p><a href="https://zynga.social/pzee">4x free credits 7.11.2024</a></p>
 
   <p><a href="https://zynga.social/xi9u">4x free credits 6.11.2024</a></p>
