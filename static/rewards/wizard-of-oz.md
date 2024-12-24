@@ -1,4 +1,8 @@
 <div class="rewards">
+  <p><a href="https://zynga.social/l74v">4x free credits 24.12.2024</a></p>
+
+  <p><a href="https://zynga.social/3cb343">.4x free credits 24.12.2024</a></p>
+
   <p><a href="https://zynga.social/0666b7">4x free credits 22.12.2024</a></p>
 
   <p><a href="https://zynga.social/b1j0">4x free credits 20.12.2024</a></p>
