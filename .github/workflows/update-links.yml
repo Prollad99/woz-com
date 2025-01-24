@@ -34,9 +34,20 @@ jobs:
 
       - name: Generate Reward Page
         run: |
+          # Get the current date
+          current_date=$(date +'%Y-%m-%d')
+
+          # Create the list
           echo '<ul class="list-group mt-3 mb-4">' > static/rewards/wizard-of-oz.md
-          jq -r '.[] | "  <li class=\"list-group-item d-flex justify-content-between align-items-center\">\n    <span>Wizard of Oz Coins \(.date)</span>\n    <a href=\"\(.href)\" class=\"btn btn-primary btn-sm\">Collect</a>\n  </li>\n"' links-json/wizard-of-oz.json >> static/rewards/wizard-of-oz.md
+
+          # Process each link and add a date if it's missing
+          jq -r ".[] | 
+            .date = if .date == null then \"$current_date\" else .date end |
+            \"  <li class=\\\"list-group-item d-flex justify-content-between align-items-center\\\">\n    <span>Wizard of Oz Coins \(.date)</span>\n    <a href=\\\"\(.href)\\\" class=\\\"btn btn-primary btn-sm\\\">Collect</a>\n  </li>\"" links-json/wizard-of-oz.json >> static/rewards/wizard-of-oz.md
+
           echo '</ul>' >> static/rewards/wizard-of-oz.md
+
+          # Show the content of the generated file for debugging
           echo "Content of static/rewards/wizard-of-oz.md:"
           cat static/rewards/wizard-of-oz.md
 
