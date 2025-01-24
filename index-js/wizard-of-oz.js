@@ -12,25 +12,15 @@ function getCurrentDate() {
   return `${year}-${month}-${day}`;
 }
 
-// Function to format the date in MM-DD-YYYY format
-function formatDateCustom(dateString) {
-  const date = new Date(dateString);
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const year = date.getFullYear();
-  return `${month}-${day}-${year}`;
-}
-
-const url = 'https://mosttechs.com/wizard-of-oz-slots-free-coins/'; // Replace with your URL
+const url = 'https://mosttechs.com/wizard-of-oz-slots-free-coins/';
 const currentDate = getCurrentDate();
 const dir = 'links-json';
 const filePath = path.join(dir, 'wizard-of-oz.json');
-const htmlFilePath = path.join('static', 'rewards', 'wizard-of-oz.md');
 
 async function main() {
   try {
-    // Initialize existing links
     let existingLinks = [];
+    // Check if the JSON file exists and read it if it does
     if (await fs.access(filePath).then(() => true).catch(() => false)) {
       try {
         const fileData = await fs.readFile(filePath, 'utf8');
@@ -42,19 +32,20 @@ async function main() {
       }
     }
 
-    // Fetch new data
+    // Fetch the page content
     const { data } = await axios.get(url);
     const $ = cheerio.load(data);
     const newLinks = [];
 
+    // Extract all anchor tags with "href" attributes containing the desired substring
     $('a[href*="zynga.social"]').each((index, element) => {
       const link = $(element).attr('href');
-      const existingLink = existingLinks.find((l) => l.href === link);
-      const date = existingLink ? existingLink.date : currentDate; // Use existing date or today's date
-      newLinks.push({ href: link, date });
+      const existingLink = existingLinks.find(l => l.href === link);
+      const date = existingLink ? existingLink.date : currentDate;
+      newLinks.push({ href: link, date: date });
     });
 
-    // Combine new links with existing ones
+    // Combine new links with existing links, ensuring no duplicates and limiting to 100 links
     const combinedLinks = [...newLinks, ...existingLinks]
       .reduce((acc, link) => {
         if (!acc.find(({ href }) => href === link.href)) {
@@ -64,27 +55,16 @@ async function main() {
       }, [])
       .slice(0, 100); // Limit to 100 links
 
-    // Save to JSON file
+    // Save the links to the JSON file
     if (!await fs.access(dir).then(() => true).catch(() => false)) {
       await fs.mkdir(dir);
     }
+
     await fs.writeFile(filePath, JSON.stringify(combinedLinks, null, 2), 'utf8');
 
-    // Generate HTML file
-    let htmlContent = '<ul class="list-group mt-3 mb-4">\n';
-    combinedLinks.forEach((link) => {
-      const formattedDate = formatDateCustom(link.date);
-      htmlContent += `  <li class="list-group-item d-flex justify-content-between align-items-center">\n`;
-      htmlContent += `    <span>Wizard of Oz Coins ${formattedDate}</span>\n`;
-      htmlContent += `    <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a>\n`;
-      htmlContent += `  </li>\n`;
-    });
-    htmlContent += '</ul>';
-
-    await fs.writeFile(htmlFilePath, htmlContent, 'utf8');
-    console.log(`HTML file saved to ${htmlFilePath}`);
+    console.log('Links saved to wizard-of-oz.json:', combinedLinks);
   } catch (err) {
-    console.error('Error:', err.message);
+    console.error('Error fetching links:', err);
     process.exit(1);
   }
 }
