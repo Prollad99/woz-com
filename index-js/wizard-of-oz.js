@@ -12,79 +12,40 @@ function getCurrentDate() {
   return `${year}-${month}-${day}`;
 }
 
-// Function to format the date in "MM-DD-YYYY" format
-function formatDateCustom(dateString) {
-  const date = new Date(dateString);
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  const year = date.getFullYear();
-  return `${month}-${day}-${year}`;
-}
-
-const url = 'https://mosttechs.com/wizard-of-oz-slots-free-coins/';
+const url = 'https://mosttechs.com/wizard-of-oz-slots-free-coins/'; // Replace with the actual URL
 const currentDate = getCurrentDate();
-const dir = 'links-json';
-const filePath = path.join(dir, 'wizard-of-oz.json');
-const htmlFilePath = path.join('static', 'rewards', 'wizard-of-oz.md');
+const filePath = path.join('links-json', 'wizard-of-oz.json');
 
 async function main() {
   try {
     let existingLinks = [];
     if (await fs.access(filePath).then(() => true).catch(() => false)) {
-      try {
-        const fileData = await fs.readFile(filePath, 'utf8');
-        if (fileData) {
-          existingLinks = JSON.parse(fileData);
-        }
-      } catch (error) {
-        console.error('Error reading existing links:', error);
-      }
+      const fileData = await fs.readFile(filePath, 'utf8');
+      existingLinks = fileData ? JSON.parse(fileData) : [];
     }
 
     const { data } = await axios.get(url);
     const $ = cheerio.load(data);
-    const newLinks = [];
 
-    $('a[href*="zdnwoz0-a.akamaihd.net"], a[href*="zynga.social"]').each((index, element) => {
+    const newLinks = [];
+    $('a[href*="zynga.social"]').each((index, element) => {
       const link = $(element).attr('href');
-      const existingLink = existingLinks.find(l => l.href === link);
+      const existingLink = existingLinks.find((l) => l.href === link);
       const date = existingLink ? existingLink.date : currentDate;
       newLinks.push({ href: link, date: date });
     });
 
-    const combinedLinks = [...newLinks, ...existingLinks]
-      .reduce((acc, link) => {
-        if (!acc.find(({ href }) => href === link.href)) {
-          acc.push(link);
-        }
-        return acc;
-      }, [])
-      .slice(0, 100); // Limit to 100 links
-
-    console.log('Final links:', combinedLinks);
-
-    if (!await fs.access(dir).then(() => true).catch(() => false)) {
-      await fs.mkdir(dir);
-    }
+    const combinedLinks = [...newLinks, ...existingLinks].reduce((acc, link) => {
+      if (!acc.find(({ href }) => href === link.href)) {
+        acc.push(link);
+      }
+      return acc;
+    }, []);
 
     await fs.writeFile(filePath, JSON.stringify(combinedLinks, null, 2), 'utf8');
-
-    // Generate HTML file with the custom date format and Collect button
-    let htmlContent = '<ul class="list-group mt-3 mb-4">\n';
-    combinedLinks.forEach(link => {
-      const formattedDate = formatDateCustom(link.date); // Format date as MM-DD-YYYY
-      htmlContent += `  <li class="list-group-item d-flex justify-content-between align-items-center">\n`;
-      htmlContent += `    <span>Wizard of Oz Coins ${formattedDate}</span>\n`;
-      htmlContent += `    <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a>\n`;
-      htmlContent += `  </li>\n`;
-    });
-    htmlContent += '</ul>';
-
-    await fs.writeFile(htmlFilePath, htmlContent, 'utf8');
-    console.log(`HTML file saved to ${htmlFilePath}`);
+    console.log(`Links updated: ${filePath}`);
   } catch (err) {
-    console.error('Error fetching links:', err);
-    process.exit(1);
+    console.error('Error:', err);
   }
 }
 
