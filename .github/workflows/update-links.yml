@@ -42,7 +42,7 @@ jobs:
 
       - name: Fetch and Update Links
         run: |
-          node wizard-of-oz.js
+          node index-js/wizard-of-oz.js
           echo "Content of links-json/wizard-of-oz.json:"
           cat links-json/wizard-of-oz.json
 
