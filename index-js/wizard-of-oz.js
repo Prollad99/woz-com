@@ -1,66 +1,96 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
 
-// Define the URL to scrape
-const url = 'https://mosttechs.com/wizard-of-oz-slots-free-coins/';
-
-// Function to format the date in "MM-DD-YYYY" format
+// Function to get the current date in YYYY-MM-DD format
 function getCurrentDate() {
   const date = new Date();
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
   const day = String(date.getDate()).padStart(2, '0');
-  return `${month}-${day}-${year}`;
+  return `${year}-${month}-${day}`;
 }
 
-axios.get(url)
-  .then(({ data }) => {
-    const $ = cheerio.load(data);
-    const links = [];
-    const currentDate = getCurrentDate();
+// Function to format the date in "MM-DD-YYYY" format
+function formatDateCustom(dateString) {
+  const date = new Date(dateString);
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month and pad with 0 if needed
+  const day = String(date.getDate()).padStart(2, '0'); // Get day and pad with 0 if needed
+  const year = date.getFullYear();
+  return `${month}-${day}-${year}`; // Return formatted date
+}
 
-    // Extract links
+const url = 'https://mosttechs.com/wizard-of-oz-slots-free-coins/';
+const currentDate = getCurrentDate();
+const dir = 'links-json';
+const filePath = path.join(dir, 'wizard-of-oz.json');
+const htmlFilePath = path.join('assets/rewards', 'wizard-of-oz.md');
+
+async function main() {
+  try {
+    let existingLinks = [];
+    if (await fs.access(filePath).then(() => true).catch(() => false)) {
+      try {
+        const fileData = await fs.readFile(filePath, 'utf8');
+        if (fileData) {
+          existingLinks = JSON.parse(fileData);
+        }
+      } catch (error) {
+        console.error('Error reading existing links:', error);
+      }
+    }
+
+    const { data } = await axios.get(url);
+    const $ = cheerio.load(data);
+    const newLinks = [];
+
+    // Scraping links
     $('a[href*="zdnwoz0-a.akamaihd.net"], a[href*="zynga.social"]').each((index, element) => {
       const link = $(element).attr('href');
-      const text = `Wizard of Oz Coins ${currentDate}`;
-      links.push({ href: link, text: text });
+      const existingLink = existingLinks.find(l => l.href === link);
+      const date = existingLink ? existingLink.date : currentDate;
+      newLinks.push({ href: link, date: date });
     });
 
-    console.log('Fetched links:', links);
+    // Combine new links with existing links, keeping the older dates if they exist
+    const combinedLinks = [...newLinks, ...existingLinks]
+      .reduce((acc, link) => {
+        if (!acc.find(({ href }) => href === link.href)) {
+          acc.push(link);
+        }
+        return acc;
+      }, [])
+      .slice(0, 100); // Limit to 100 links
 
-    // Save links as JSON
-    const dir = 'links-json';
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
+    console.log('Final links:', combinedLinks);
+
+    // Make sure the directory exists
+    if (!await fs.access(dir).then(() => true).catch(() => false)) {
+      await fs.mkdir(dir);
     }
 
-    const jsonFilePath = path.join(dir, 'wizard-of-oz.json');
-    fs.writeFileSync(jsonFilePath, JSON.stringify(links, null, 2), 'utf8');
-    console.log(`Links saved to ${jsonFilePath}`);
+    // Write the updated JSON with the links
+    await fs.writeFile(filePath, JSON.stringify(combinedLinks, null, 2), 'utf8');
 
-    // Generate HTML content with the Collect button
-    const rewardsDir = 'assets/rewards';
-    if (!fs.existsSync(rewardsDir)) {
-      fs.mkdirSync(rewardsDir, { recursive: true });
-    }
-
-    const htmlFilePath = path.join(rewardsDir, 'wizard-of-oz.md');
+    // Generate HTML with the Collect button
     let htmlContent = '<ul class="list-group mt-3 mb-4">\n';
-    links.forEach(link => {
+    combinedLinks.forEach(link => {
+      const formattedDate = formatDateCustom(link.date); // Format date as MM-DD-YYYY
       htmlContent += `  <li class="list-group-item d-flex justify-content-between align-items-center">\n`;
-      htmlContent += `    <span>${link.text}</span>\n`;
+      htmlContent += `    <span>Wizard of Oz Coins ${formattedDate}</span>\n`; // Custom text with formatted date
       htmlContent += `    <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a>\n`;
       htmlContent += `  </li>\n`;
     });
     htmlContent += '</ul>';
 
-    // Write the generated HTML content to the markdown file
-    fs.writeFileSync(htmlFilePath, htmlContent, 'utf8');
-    console.log(`HTML file with Collect button saved to ${htmlFilePath}`);
-  })
-  .catch(err => {
+    // Write the HTML content to the markdown file
+    await fs.writeFile(htmlFilePath, htmlContent, 'utf8');
+    console.log(`HTML file saved to ${htmlFilePath}`);
+  } catch (err) {
     console.error('Error fetching links:', err);
     process.exit(1);
-  });
+  }
+}
+
+main();
