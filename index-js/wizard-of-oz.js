@@ -81,7 +81,7 @@ async function main() {
       const formattedDate = formatDateCustom(link.date);
       htmlContent += `  <li class="list-group-item d-flex justify-content-between align-items-center">\n`;
       htmlContent += `    <span>Wizard of Oz Coins ${formattedDate}</span>\n`;
-      htmlContent += `    <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a>\n`;
+      htmlContent += `    <a href="${link.href}" class="btn btn-primary btn-sm" target="_blank">Collect</a>\n`;
       htmlContent += `  </li>\n`;
     });
     htmlContent += '</ul>';
