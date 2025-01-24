@@ -15,10 +15,10 @@ function getCurrentDate() {
 // Function to format the date in "MM-DD-YYYY" format
 function formatDateCustom(dateString) {
   const date = new Date(dateString);
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month and pad with 0 if needed
-  const day = String(date.getDate()).padStart(2, '0'); // Get day and pad with 0 if needed
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
   const year = date.getFullYear();
-  return `${month}-${day}-${year}`; // Return formatted date
+  return `${month}-${day}-${year}`;
 }
 
 const url = 'https://mosttechs.com/wizard-of-oz-slots-free-coins/';
@@ -30,6 +30,7 @@ const htmlFilePath = path.join('assets/rewards', 'wizard-of-oz.md');
 async function main() {
   try {
     let existingLinks = [];
+    // Check if the existing links file exists and read it
     if (await fs.access(filePath).then(() => true).catch(() => false)) {
       try {
         const fileData = await fs.readFile(filePath, 'utf8');
@@ -41,11 +42,12 @@ async function main() {
       }
     }
 
+    // Fetch new links from the webpage
     const { data } = await axios.get(url);
     const $ = cheerio.load(data);
     const newLinks = [];
 
-    // Scraping links
+    // Scrape specific links based on the URL patterns
     $('a[href*="zdnwoz0-a.akamaihd.net"], a[href*="zynga.social"]').each((index, element) => {
       const link = $(element).attr('href');
       const existingLink = existingLinks.find(l => l.href === link);
@@ -53,7 +55,7 @@ async function main() {
       newLinks.push({ href: link, date: date });
     });
 
-    // Combine new links with existing links, keeping the older dates if they exist
+    // Combine new and existing links while removing duplicates
     const combinedLinks = [...newLinks, ...existingLinks]
       .reduce((acc, link) => {
         if (!acc.find(({ href }) => href === link.href)) {
@@ -61,24 +63,24 @@ async function main() {
         }
         return acc;
       }, [])
-      .slice(0, 100); // Limit to 100 links
+      .slice(0, 100); // Limit the links to 100
 
     console.log('Final links:', combinedLinks);
 
-    // Make sure the directory exists
+    // Ensure the directory exists
     if (!await fs.access(dir).then(() => true).catch(() => false)) {
       await fs.mkdir(dir);
     }
 
-    // Write the updated JSON with the links
+    // Write the updated JSON file with the new links
     await fs.writeFile(filePath, JSON.stringify(combinedLinks, null, 2), 'utf8');
 
-    // Generate HTML with the Collect button
+    // Generate the HTML content with the Collect button
     let htmlContent = '<ul class="list-group mt-3 mb-4">\n';
     combinedLinks.forEach(link => {
-      const formattedDate = formatDateCustom(link.date); // Format date as MM-DD-YYYY
+      const formattedDate = formatDateCustom(link.date);
       htmlContent += `  <li class="list-group-item d-flex justify-content-between align-items-center">\n`;
-      htmlContent += `    <span>Wizard of Oz Coins ${formattedDate}</span>\n`; // Custom text with formatted date
+      htmlContent += `    <span>Wizard of Oz Coins ${formattedDate}</span>\n`;
       htmlContent += `    <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a>\n`;
       htmlContent += `  </li>\n`;
     });
