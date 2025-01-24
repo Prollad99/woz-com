@@ -1,16 +1,27 @@
 {{ define "main" }}
     <main class="container">
-        <!-- Display the title as an <h1> -->
         <div class="row">
             <div class="col">
                 <div class="card shadow-sm mb-2">
                     <div class="card-body">
-                        <!-- Add the title here as an h1 -->
+                        <!-- Add the title as an h1 -->
                         <h1>{{ .Title }}</h1>
+
+                        <!-- Add the tags section -->
+                        {{ if .Params.tags }}
+                          <div class="tags mt-3 mb-3">
+                            <span class="badge badge-primary">Tags:</span>
+                            {{ range .Params.tags }}
+                              <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="badge badge-secondary">{{ . }}</a>
+                            {{ end }}
+                          </div>
+                        {{ end }}
+                        <!-- End tags -->
+
                         <!-- Display the content of _index.md -->
                         {{ .Content }}
-                        
-                        <!-- Share start -->
+
+                        <!-- Share buttons start -->
                         <div class="mt-4">
                             <a href="https://www.facebook.com/sharer/sharer.php?u={{ .Permalink }}" class="btn btn-primary mb-2 me-2">
                                 <i class="bi bi-facebook"></i> Share on Facebook
@@ -28,7 +39,7 @@
                                 <i class="bi bi-whatsapp"></i> Share on WhatsApp
                             </a>
                         </div>
-                        <!-- Share end -->
+                        <!-- Share buttons end -->
                     </div>
                 </div>
             </div>
