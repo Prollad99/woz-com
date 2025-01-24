@@ -17,13 +17,9 @@ jobs:
 
       - name: Ensure package.json and Install Dependencies
         run: |
-          # Create package.json if it doesn't exist
           if [ ! -f package.json ]; then
-            echo 'Creating package.json...'
             npm init -y
           fi
-
-          # Add necessary dependencies
           npm install axios cheerio
 
       - name: Cache node modules
@@ -37,23 +33,13 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install jq (for JSON processing)
-        run: sudo apt-get install -y jq
-
       - name: Fetch and Update Links
         run: |
           node index-js/wizard-of-oz.js
           echo "Content of links-json/wizard-of-oz.json:"
           cat links-json/wizard-of-oz.json
-
-      - name: Update Reward Page
-        run: |
-          mkdir -p static/rewards
-          echo '<div class="rewards">' > static/rewards/wizard-of-oz.md
-          jq -r '.[] | "  <p><a href=\"" + .href + "\">" + .text + "</a></p>\n"' links-json/wizard-of-oz.json >> static/rewards/wizard-of-oz.md
-          echo '</div>' >> static/rewards/wizard-of-oz.md
-          echo "Content of static/rewards/wizard-of-oz.md:"
-          cat static/rewards/wizard-of-oz.md
+          echo "Content of assets/rewards/wizard-of-oz.md:"
+          cat assets/rewards/wizard-of-oz.md
 
       - name: Configure Git
         run: |
@@ -64,7 +50,7 @@ jobs:
         env:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         run: |
-          git add static/rewards/wizard-of-oz.md links-json/wizard-of-oz.json
+          git add assets/rewards/wizard-of-oz.md links-json/wizard-of-oz.json
           git commit -m "Update wizard-of-oz reward links" || true
 
           git pull --rebase || (echo "Rebase failed, aborting" && git rebase --abort && exit 1)
