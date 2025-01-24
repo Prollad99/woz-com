@@ -15,6 +15,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Ensure package.json and package-lock.json
+        run: |
+          if [ ! -f package.json ]; then
+            echo 'Creating package.json...'
+            npm init -y
+          fi
+          if [ ! -f package-lock.json ]; then
+            echo 'Running npm install to generate package-lock.json...'
+            npm install
+          fi
+
       - name: Cache node modules
         uses: actions/cache@v2
         with:
