@@ -24,8 +24,8 @@ axios.get(url)
     // Extract links
     $('a[href*="zdnwoz0-a.akamaihd.net"], a[href*="zynga.social"]').each((index, element) => {
       const link = $(element).attr('href');
-      const text = $(element).text().trim();
-      links.push({ href: link, text: `Wizard of Oz Coins ${currentDate}` });
+      const text = `Wizard of Oz Coins ${currentDate}`;
+      links.push({ href: link, text: text });
     });
 
     console.log('Fetched links:', links);
@@ -56,6 +56,7 @@ axios.get(url)
     });
     htmlContent += '</ul>';
 
+    // Write the generated HTML content to the markdown file
     fs.writeFileSync(htmlFilePath, htmlContent, 'utf8');
     console.log(`HTML file with Collect button saved to ${htmlFilePath}`);
   })
