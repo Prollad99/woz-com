@@ -29,24 +29,5 @@
                 </div>
             </div>
         </div>
-
-        <!-- Display a list of all posts -->
-        <div class="row">
-            <div class="col">
-                <div class="card shadow-sm mb-2">
-                    <div class="card-body">
-                        <h2>Blog</h2>
-                        <ul class="list-group fixed-height-scroll">
-                            {{ $pages := where .Site.RegularPages "Params.excludeFromHome" "ne" true }}
-                            {{ range $pages }}
-                                <li class="list-group-item">
-                                    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-                                </li>
-                            {{ end }}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
 {{ end }}
