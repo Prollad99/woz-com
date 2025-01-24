@@ -19,11 +19,13 @@
                             {{ end }}
                         </p>
 
-                        <!-- Truncate content to 30 words -->
-                        {{ $content := .Content | plainify }}
-                        {{ $truncated := (slice (split $content " ") 0 30) | delimit " " }}
+                        <!-- Display up to 30 characters of content -->
                         <p class="card-text">
-                            {{ $truncated }}...
+                            {{ if eq .File.Path "content/_index.md" }}
+                                {{ .Content | plainify | truncate 30 "..." }}
+                            {{ else }}
+                                {{ .Summary | plainify | truncate 30 "..." }}
+                            {{ end }}
                         </p>
 
                         <div class="text-right">
