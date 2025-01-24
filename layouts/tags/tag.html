@@ -19,17 +19,15 @@
                             {{ end }}
                         </p>
 
-                        <!-- Check if the content is from _index.md -->
-                        {{ if eq .File.Path "content/_index.md" }}
-                            <blockquote class="card-text">
-                                {{ .Content }}
-                            </blockquote>
-                        {{ else }}
-                            <p class="card-text">{{ .Summary }}</p>
-                        {{ end }}
+                        <!-- Truncate content to 30 words -->
+                        {{ $content := .Content | plainify }}
+                        {{ $truncated := (slice (split $content " ") 0 30) | delimit " " }}
+                        <p class="card-text">
+                            {{ $truncated }}...
+                        </p>
 
                         <div class="text-right">
-                            <a href="{{ .RelPermalink }}" class="btn btn-primary btn-sm">Read More</a>
+                            <a href="{{ .RelPermalink }}" class="btn btn-primary btn-sm">Claim Now</a>
                         </div>
                     </div>
                 </div>
