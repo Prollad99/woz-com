@@ -15,13 +15,12 @@ function getCurrentDate() {
 // Function to format the date in "MM-DD-YYYY" format
 function formatDateCustom(dateString) {
   const date = new Date(dateString);
-  const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month and pad with 0 if needed
-  const day = String(date.getDate()).padStart(2, '0'); // Get day and pad with 0 if needed
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
   const year = date.getFullYear();
-  return `${month}-${day}-${year}`; // Return formatted date
+  return `${month}-${day}-${year}`;
 }
 
-// URL to scrape
 const url = 'https://mosttechs.com/wizard-of-oz-slots-free-coins/';
 const currentDate = getCurrentDate();
 const dir = 'links-json';
@@ -46,7 +45,6 @@ async function main() {
     const $ = cheerio.load(data);
     const newLinks = [];
 
-    // Scrape all relevant links
     $('a[href*="zdnwoz0-a.akamaihd.net"], a[href*="zynga.social"]').each((index, element) => {
       const link = $(element).attr('href');
       const existingLink = existingLinks.find(l => l.href === link);
@@ -54,7 +52,6 @@ async function main() {
       newLinks.push({ href: link, date: date });
     });
 
-    // Combine new links with existing links, keeping the older dates if they exist
     const combinedLinks = [...newLinks, ...existingLinks]
       .reduce((acc, link) => {
         if (!acc.find(({ href }) => href === link.href)) {
@@ -72,13 +69,16 @@ async function main() {
 
     await fs.writeFile(filePath, JSON.stringify(combinedLinks, null, 2), 'utf8');
 
-    // Generate HTML file with the custom date format and text
-    let htmlContent = '<div class="rewards">\n';
+    // Generate HTML file with the custom date format and Collect button
+    let htmlContent = '<ul class="list-group mt-3 mb-4">\n';
     combinedLinks.forEach(link => {
       const formattedDate = formatDateCustom(link.date); // Format date as MM-DD-YYYY
-      htmlContent += `  <p><span>Wizard of Oz Coins ${formattedDate}</span> <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a></p>\n`;
+      htmlContent += `  <li class="list-group-item d-flex justify-content-between align-items-center">\n`;
+      htmlContent += `    <span>Wizard of Oz Coins ${formattedDate}</span>\n`;
+      htmlContent += `    <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a>\n`;
+      htmlContent += `  </li>\n`;
     });
-    htmlContent += '</div>';
+    htmlContent += '</ul>';
 
     await fs.writeFile(htmlFilePath, htmlContent, 'utf8');
     console.log(`HTML file saved to ${htmlFilePath}`);
