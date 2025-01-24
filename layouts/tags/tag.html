@@ -2,7 +2,9 @@
 <div class="container mt-4">
     <!-- Convert the tag title to title case and display in h1 -->
     <h1 class="mb-4">{{ .Title | title }}</h1>
+
     <div class="row">
+        <!-- Loop through all pages associated with the tag -->
         {{ range .Pages }}
             <div class="col-md-6 mb-4">
                 <div class="card shadow-sm">
@@ -17,13 +19,13 @@
                             {{ end }}
                         </p>
 
-                        <!-- Display _index.md content for tags -->
+                        <!-- Check if the content is from _index.md -->
                         {{ if eq .File.Path "content/_index.md" }}
                             <blockquote class="card-text">
                                 {{ .Content }}
                             </blockquote>
                         {{ else }}
-                            <p class="card-text">{{ .Description }}</p>
+                            <p class="card-text">{{ .Summary }}</p>
                         {{ end }}
 
                         <div class="text-right">
