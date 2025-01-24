@@ -16,12 +16,13 @@ function getCurrentDate() {
 const url = 'https://mosttechs.com/wizard-of-oz-slots-free-coins/'; // Replace with the actual URL
 const currentDate = getCurrentDate();
 const filePath = path.join('links-json', 'wizard-of-oz.json');
+const htmlFilePath = path.join('static', 'rewards', 'wizard-of-oz.md');
 
 // Main function to scrape links and update JSON
 async function main() {
   try {
     let existingLinks = [];
-    
+
     // Read existing links if the file exists
     if (await fs.access(filePath).then(() => true).catch(() => false)) {
       const fileData = await fs.readFile(filePath, 'utf8');
@@ -37,7 +38,7 @@ async function main() {
     $('a[href*="zynga.social"]').each((index, element) => {
       const link = $(element).attr('href');
       const existingLink = existingLinks.find((l) => l.href === link);
-      const date = existingLink ? existingLink.date : currentDate; // Use existing date or current date
+      const date = existingLink ? existingLink.date : currentDate; // Use existing date or set current date
       newLinks.push({ href: link, date: date });
     });
 
@@ -52,6 +53,20 @@ async function main() {
     // Write the updated links to the JSON file
     await fs.writeFile(filePath, JSON.stringify(combinedLinks, null, 2), 'utf8');
     console.log(`Links updated and saved to: ${filePath}`);
+
+    // Generate the HTML content
+    let htmlContent = '<ul class="list-group mt-3 mb-4">\n';
+    combinedLinks.forEach((link) => {
+      htmlContent += `  <li class="list-group-item d-flex justify-content-between align-items-center">\n`;
+      htmlContent += `    <span>Wizard of Oz Coins ${link.date || 'Unknown'}</span>\n`;
+      htmlContent += `    <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a>\n`;
+      htmlContent += `  </li>\n`;
+    });
+    htmlContent += '</ul>';
+
+    // Write the HTML content to the file
+    await fs.writeFile(htmlFilePath, htmlContent, 'utf8');
+    console.log(`HTML file updated and saved to: ${htmlFilePath}`);
   } catch (err) {
     console.error('Error:', err);
   }
