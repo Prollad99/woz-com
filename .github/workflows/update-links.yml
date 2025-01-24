@@ -24,7 +24,10 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm install jq axios cheerio
+        run: npm ci
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
 
       - name: Fetch and Update Links
         run: |
@@ -34,6 +37,7 @@ jobs:
 
       - name: Update Reward Page
         run: |
+          mkdir -p static/rewards
           echo '<div class="rewards">' > static/rewards/wizard-of-oz.md
           jq -r '.[] | "  <p><a href=\"" + .href + "\">" + .text + "</a></p>\n"' links-json/wizard-of-oz.json >> static/rewards/wizard-of-oz.md
           echo '</div>' >> static/rewards/wizard-of-oz.md
@@ -52,10 +56,8 @@ jobs:
           git add static/rewards/wizard-of-oz.md links-json/wizard-of-oz.json
           git commit -m "Update wizard-of-oz reward links" || true
 
-          # Pull with rebase to ensure the latest changes are included
-          git pull --rebase
+          git pull --rebase || (echo "Rebase failed, aborting" && git rebase --abort && exit 1)
 
-          # Push changes, retry if necessary
           for i in {1..5}; do
             git push https://x-access-token:${{ secrets.ACTIONS_DEPLOY_KEY }}@github.com/Prollad99/woz-com.git && break
             echo "Retry $i: Push failed, retrying in 5 seconds..."
