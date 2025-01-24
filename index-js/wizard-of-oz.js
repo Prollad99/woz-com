@@ -41,12 +41,15 @@ axios.get(url)
     console.log(`Links saved to ${filePath}`);
 
     // Generate HTML for the reward page with the "Collect" button
-    let htmlContent = '<div class="rewards">\n';
+    let htmlContent = '<ul class="list-group mt-3 mb-4">\n';
     links.forEach(link => {
       const currentDate = formatDateCustom(new Date()); // Get today's date in MM-DD-YYYY format
-      htmlContent += `  <p><a href="${link.href}">${link.text} ${currentDate}</a> <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a></p>\n`;
+      htmlContent += `  <li class="list-group-item d-flex justify-content-between align-items-center">\n`;
+      htmlContent += `    <span>Wizard of Oz Coins ${currentDate}</span>\n`; // Custom text with formatted date
+      htmlContent += `    <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a>\n`;
+      htmlContent += `  </li>\n`;
     });
-    htmlContent += '</div>';
+    htmlContent += '</ul>';
 
     // Write HTML to a file
     const htmlFilePath = path.join('static', 'rewards', 'wizard-of-oz.md');
