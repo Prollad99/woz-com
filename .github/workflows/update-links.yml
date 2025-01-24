@@ -15,14 +15,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Ensure package.json and Install Dependencies
-        run: |
-          if [ ! -f package.json ]; then
-            echo 'Creating package.json...'
-            npm init -y
-          fi
-          npm install axios cheerio
-
       - name: Cache node modules
         uses: actions/cache@v2
         with:
@@ -32,10 +24,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - name: Install dependencies
-        run: npm ci
-
-      - name: Install jq (for JSON processing)
-        run: sudo apt-get install -y jq
+        run: npm install jq axios cheerio
 
       - name: Fetch and Update Links
         run: |
@@ -43,12 +32,11 @@ jobs:
           echo "Content of links-json/wizard-of-oz.json:"
           cat links-json/wizard-of-oz.json
 
-      - name: Update Reward Page
+      - name: Generate Reward Page
         run: |
-          mkdir -p static/rewards
-          echo '<div class="rewards">' > static/rewards/wizard-of-oz.md
-          jq -r '.[] | "  <p><a href=\"" + .href + "\">" + .text + "</a> <a href=\"" + .href + "\" class=\"btn btn-primary btn-sm\">Collect</a></p>\n"' links-json/wizard-of-oz.json >> static/rewards/wizard-of-oz.md
-          echo '</div>' >> static/rewards/wizard-of-oz.md
+          echo '<ul class="list-group mt-3 mb-4">' > static/rewards/wizard-of-oz.md
+          jq -r '.[] | "  <li class=\"list-group-item d-flex justify-content-between align-items-center\">\n    <span>Wizard of Oz Coins \(.date)</span>\n    <a href=\"\(.href)\" class=\"btn btn-primary btn-sm\">Collect</a>\n  </li>\n"' links-json/wizard-of-oz.json >> static/rewards/wizard-of-oz.md
+          echo '</ul>' >> static/rewards/wizard-of-oz.md
           echo "Content of static/rewards/wizard-of-oz.md:"
           cat static/rewards/wizard-of-oz.md
 
@@ -62,8 +50,12 @@ jobs:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         run: |
           git add static/rewards/wizard-of-oz.md links-json/wizard-of-oz.json
-          git commit -m "Update wizard-of-oz reward links" || true
-          git pull --rebase || (echo "Rebase failed, aborting" && git rebase --abort && exit 1)
+          git commit -m "Update wizard-of-oz reward links and page" || true
+
+          # Pull with rebase to ensure the latest changes are included
+          git pull --rebase
+
+          # Push changes, retry if necessary
           for i in {1..5}; do
             git push https://x-access-token:${{ secrets.ACTIONS_DEPLOY_KEY }}@github.com/Prollad99/woz-com.git && break
             echo "Retry $i: Push failed, retrying in 5 seconds..."
