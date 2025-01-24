@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
     {{ if eq .RelPermalink "/" }} 
-        {{ .Title }} {{ now.Format "January 2006" }}
+        {{ .Title | title }} {{ now.Format "January 2006" }}
     {{ else }}
-        {{ .Title }}
+        {{ .Title | title }}
     {{ end }}
 </title>
     <link rel="manifest" href="/manifest.json">
