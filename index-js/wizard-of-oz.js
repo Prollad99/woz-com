@@ -12,63 +12,80 @@ function getCurrentDate() {
   return `${year}-${month}-${day}`;
 }
 
-// Define the target URL and paths
+// Function to format the date in "MM-DD-YYYY" format
+function formatDateCustom(dateString) {
+  const date = new Date(dateString);
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Get month and pad with 0 if needed
+  const day = String(date.getDate()).padStart(2, '0'); // Get day and pad with 0 if needed
+  const year = date.getFullYear();
+  return `${month}-${day}-${year}`; // Return formatted date
+}
+
 const url = 'https://mosttechs.com/wizard-of-oz-slots-free-coins/'; // Replace with the actual URL
 const currentDate = getCurrentDate();
-const filePath = path.join('links-json', 'wizard-of-oz.json');
+const dir = 'links-json';
+const filePath = path.join(dir, 'wizard-of-oz.json');
 const htmlFilePath = path.join('static', 'rewards', 'wizard-of-oz.md');
 
-// Main function to scrape links and update JSON
 async function main() {
   try {
     let existingLinks = [];
-
-    // Read existing links if the file exists
     if (await fs.access(filePath).then(() => true).catch(() => false)) {
-      const fileData = await fs.readFile(filePath, 'utf8');
-      existingLinks = fileData ? JSON.parse(fileData) : [];
+      try {
+        const fileData = await fs.readFile(filePath, 'utf8');
+        if (fileData) {
+          existingLinks = JSON.parse(fileData);
+        }
+      } catch (error) {
+        console.error('Error reading existing links:', error);
+      }
     }
 
-    // Fetch the HTML content from the URL
     const { data } = await axios.get(url);
     const $ = cheerio.load(data);
-
-    // Extract links and add/update their dates
     const newLinks = [];
+
     $('a[href*="zynga.social"]').each((index, element) => {
       const link = $(element).attr('href');
       const existingLink = existingLinks.find((l) => l.href === link);
-      const date = existingLink ? existingLink.date : currentDate; // Use existing date or set current date
+      const date = existingLink ? existingLink.date : currentDate;
       newLinks.push({ href: link, date: date });
     });
 
-    // Combine new and existing links, keeping unique entries
-    const combinedLinks = [...newLinks, ...existingLinks].reduce((acc, link) => {
-      if (!acc.find(({ href }) => href === link.href)) {
-        acc.push(link);
-      }
-      return acc;
-    }, []);
+    // Combine new links with existing links, keeping the older dates if they exist
+    const combinedLinks = [...newLinks, ...existingLinks]
+      .reduce((acc, link) => {
+        if (!acc.find(({ href }) => href === link.href)) {
+          acc.push(link);
+        }
+        return acc;
+      }, [])
+      .slice(0, 100); // Limit to 100 links
 
-    // Write the updated links to the JSON file
+    console.log('Final links:', combinedLinks);
+
+    if (!await fs.access(dir).then(() => true).catch(() => false)) {
+      await fs.mkdir(dir);
+    }
+
     await fs.writeFile(filePath, JSON.stringify(combinedLinks, null, 2), 'utf8');
-    console.log(`Links updated and saved to: ${filePath}`);
 
-    // Generate the HTML content
+    // Generate HTML file with the custom date format and text
     let htmlContent = '<ul class="list-group mt-3 mb-4">\n';
     combinedLinks.forEach((link) => {
+      const formattedDate = formatDateCustom(link.date); // Format date as MM-DD-YYYY
       htmlContent += `  <li class="list-group-item d-flex justify-content-between align-items-center">\n`;
-      htmlContent += `    <span>Wizard of Oz Coins ${link.date || 'Unknown'}</span>\n`;
+      htmlContent += `    <span>Wizard of Oz Coins ${formattedDate}</span>\n`; // Custom text with formatted date
       htmlContent += `    <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a>\n`;
       htmlContent += `  </li>\n`;
     });
     htmlContent += '</ul>';
 
-    // Write the HTML content to the file
     await fs.writeFile(htmlFilePath, htmlContent, 'utf8');
-    console.log(`HTML file updated and saved to: ${htmlFilePath}`);
+    console.log(`HTML file saved to ${htmlFilePath}`);
   } catch (err) {
-    console.error('Error:', err);
+    console.error('Error fetching links:', err);
+    process.exit(1);
   }
 }
 
