@@ -22,9 +22,9 @@
                         <!-- Display up to 30 characters of content -->
                         <p class="card-text">
                             {{ if eq .File.Path "content/_index.md" }}
-                                {{ .Content | plainify | truncate 30 "..." }}
+                                {{ .Content | plainify | truncate 160 "..." }}
                             {{ else }}
-                                {{ .Summary | plainify | truncate 30 "..." }}
+                                {{ .Summary | plainify | truncate 160 "..." }}
                             {{ end }}
                         </p>
 
