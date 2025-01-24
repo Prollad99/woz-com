@@ -47,12 +47,14 @@ axios.get(url)
     }
 
     const htmlFilePath = path.join(rewardsDir, 'wizard-of-oz.md');
-    let htmlContent = '<div class="rewards">\n';
+    let htmlContent = '<ul class="list-group mt-3 mb-4">\n';
     links.forEach(link => {
-      htmlContent += `  <p>${link.text}</p>\n`;
-      htmlContent += `  <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a>\n`;
+      htmlContent += `  <li class="list-group-item d-flex justify-content-between align-items-center">\n`;
+      htmlContent += `    <span>${link.text}</span>\n`;
+      htmlContent += `    <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a>\n`;
+      htmlContent += `  </li>\n`;
     });
-    htmlContent += '</div>';
+    htmlContent += '</ul>';
 
     fs.writeFileSync(htmlFilePath, htmlContent, 'utf8');
     console.log(`HTML file with Collect button saved to ${htmlFilePath}`);
