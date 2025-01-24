@@ -1,6 +1,7 @@
 {{ define "main" }}
 <div class="container mt-4">
-    <h2 class="mb-4">Tag: {{ .Title }}</h2>
+    <!-- Convert the tag title to title case and display in h1 -->
+    <h1 class="mb-4">{{ .Title | title }}</h1>
     <div class="row">
         {{ range .Pages }}
             <div class="col-md-6 mb-4">
@@ -9,13 +10,22 @@
                         <a href="{{ .RelPermalink }}">
                             <h5 class="card-title">{{ .Title }}</h5>
                         </a>
-<p class="post-meta text-secondary mt-2">
-        <span class="post-date">Published on {{ .Date.Format "2 January 2006" }}</span>
-        {{ if .Params.author }}
-            <span class="post-author">by {{ .Params.author }}</span>
-        {{ end }}
-</p>
-                        <p class="card-text">{{ .Description }}</p>
+                        <p class="post-meta text-secondary mt-2">
+                            <span class="post-date">Published on {{ .Date.Format "2 January 2006" }}</span>
+                            {{ if .Params.author }}
+                                <span class="post-author">by {{ .Params.author }}</span>
+                            {{ end }}
+                        </p>
+
+                        <!-- Display _index.md content for tags -->
+                        {{ if eq .File.Path "content/_index.md" }}
+                            <blockquote class="card-text">
+                                {{ .Content }}
+                            </blockquote>
+                        {{ else }}
+                            <p class="card-text">{{ .Description }}</p>
+                        {{ end }}
+
                         <div class="text-right">
                             <a href="{{ .RelPermalink }}" class="btn btn-primary btn-sm">Read More</a>
                         </div>
