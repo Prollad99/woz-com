@@ -50,7 +50,7 @@ jobs:
           ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         run: |
           git add static/rewards/wizard-of-oz.md links-json/wizard-of-oz.json
-          git commit -m "Update wizard-of-oz reward links and page" || true
+          git commit -m "Update wizard-of-oz reward links" || true
 
           # Pull with rebase to ensure the latest changes are included
           git pull --rebase
