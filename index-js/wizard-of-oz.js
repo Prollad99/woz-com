@@ -73,15 +73,12 @@ async function main() {
     await fs.writeFile(filePath, JSON.stringify(combinedLinks, null, 2), 'utf8');
 
     // Generate HTML file with the custom date format and text
-    let htmlContent = '<ul class="list-group mt-3 mb-4">\n';
+    let htmlContent = '<div class="rewards">\n';
     combinedLinks.forEach(link => {
       const formattedDate = formatDateCustom(link.date); // Format date as MM-DD-YYYY
-      htmlContent += `  <li class="list-group-item d-flex justify-content-between align-items-center">\n`;
-      htmlContent += `    <span>Wizard of Oz Coins ${formattedDate}</span>\n`; // Custom text with formatted date
-      htmlContent += `    <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a>\n`;
-      htmlContent += `  </li>\n`;
+      htmlContent += `  <p><span>Wizard of Oz Coins ${formattedDate}</span> <a href="${link.href}" class="btn btn-primary btn-sm">Collect</a></p>\n`;
     });
-    htmlContent += '</ul>';
+    htmlContent += '</div>';
 
     await fs.writeFile(htmlFilePath, htmlContent, 'utf8');
     console.log(`HTML file saved to ${htmlFilePath}`);
