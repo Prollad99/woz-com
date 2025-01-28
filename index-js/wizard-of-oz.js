@@ -3,7 +3,6 @@ const cheerio = require('cheerio');
 const fs = require('fs').promises;
 const path = require('path');
 
-// Function to get the current date in YYYY-MM-DD format
 function getCurrentDate() {
   const date = new Date();
   const year = date.getFullYear();
@@ -20,24 +19,19 @@ const filePath = path.join(dir, 'wizard-of-oz.json');
 async function main() {
   try {
     let existingLinks = [];
-    // Check if the JSON file exists and read it if it does
     if (await fs.access(filePath).then(() => true).catch(() => false)) {
       try {
         const fileData = await fs.readFile(filePath, 'utf8');
-        if (fileData) {
-          existingLinks = JSON.parse(fileData);
-        }
+        existingLinks = fileData ? JSON.parse(fileData) : [];
       } catch (error) {
         console.error('Error reading existing links:', error);
       }
     }
 
-    // Fetch the page content
     const { data } = await axios.get(url);
     const $ = cheerio.load(data);
     const newLinks = [];
 
-    // Extract all anchor tags with "href" attributes containing the desired substring
     $('a[href*="zynga.social"]').each((index, element) => {
       const link = $(element).attr('href');
       const existingLink = existingLinks.find(l => l.href === link);
@@ -45,23 +39,26 @@ async function main() {
       newLinks.push({ href: link, date: date });
     });
 
-    // Combine new links with existing links, ensuring no duplicates and limiting to 100 links
-    const combinedLinks = [...newLinks, ...existingLinks]
+    let combinedLinks = [...newLinks, ...existingLinks]
       .reduce((acc, link) => {
-        if (!acc.find(({ href }) => href === link.href)) {
+        if (!acc.some(l => l.href === link.href)) {
           acc.push(link);
         }
         return acc;
       }, [])
-      .slice(0, 100); // Limit to 100 links
+      .slice(0, 100);
 
-    // Save the links to the JSON file
+    // Ensure all links have a date
+    combinedLinks = combinedLinks.map(link => ({
+      ...link,
+      date: link.date || currentDate
+    }));
+
     if (!await fs.access(dir).then(() => true).catch(() => false)) {
       await fs.mkdir(dir);
     }
 
     await fs.writeFile(filePath, JSON.stringify(combinedLinks, null, 2), 'utf8');
-
     console.log('Links saved to wizard-of-oz.json:', combinedLinks);
   } catch (err) {
     console.error('Error fetching links:', err);
