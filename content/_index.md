@@ -16,16 +16,6 @@ description: "🆓 Claim FREE Wizard of Oz coins instantly! Daily-tested links, 
 
 ---
 
-<div class="trust-badges">
-
-✅ **12,345+ Coins Claimed Today**  
-🛡️ **Links Tested Every 2 Hours**  
-📅 **New Rewards Added Daily**
-
-</div>
-
----
-
 ## 🚨 **Critical Alert: Avoid July 2024 Scams**  
 **Fake Links Circulating:**  
 - ❌ `wizard-of0z.com` (malware site)  
