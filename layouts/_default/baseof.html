@@ -3,13 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-    {{ if eq .RelPermalink "/" }} 
-        {{ .Title | title }} {{ now.Format "January 2006" }}
-    {{ else }}
-        {{ .Title | title }}
-    {{ end }}
-</title>
+    <title>{{ if .IsHome }}{{ .Site.Title }} - {{ .Site.Params.homeTitle }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+<meta name="description" content="{{ if .IsHome }}{{ .Site.Params.homeDescription }}{{ else }}{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.defaultDescription }}{{ end }}{{ end }}">
     <link rel="manifest" href="/manifest.json">
 <script>
     if ('serviceWorker' in navigator) {
