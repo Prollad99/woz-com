@@ -12,7 +12,12 @@ type: homepage
 description: "🆓 Claim FREE Wizard of Oz coins instantly! Daily-tested links, updated daily. No scams, no surveys!"
 ---
 
+<div class="text-center">
+
+🎉 **Last Checked:** {{< datetime "now" "3:04 PM MST" >}}  
 🔒 **100% Safe** | ⚡ **Instant Delivery** | 🆕 **Updated Daily**
+
+</div>
 
 ---
 
