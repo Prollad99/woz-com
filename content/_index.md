@@ -1,23 +1,19 @@
 ---
 title: "Wizard of Oz Free Coins Today: 100% Working Links (No Surveys)"
 date: 2024-07-01
-tags: ["wizard of oz free coins", "free coins wizard of oz today", "zynga slots free coins"]
+tags: 
+  - "wizard of oz free coins"
+  - "free coins wizard of oz today"
+  - "zynga slots free coins"
 author: Admin
-type: "homepage"
-description: "🆓 Claim FREE Wizard of Oz coins instantly! Daily-tested links, updated dynamically. No scams, no surveys!"
+type: homepage
+description: "🆓 Claim FREE Wizard of Oz coins instantly! Daily-tested links, updated daily. No scams, no surveys!"
 ---
 
 <div class="text-center">
-
-🎉 **Last Checked:** {{< datetime "now" "3:04 PM MST" >}}  
-🔒 **100% Safe** | ⚡ **Instant Delivery** | 🆕 **Updated Daily**
-
+🎉 <strong>Last Checked:</strong> {{< datetime "now" "3:04 PM MST" >}}  
+🔒 <strong>100% Safe</strong> | ⚡ <strong>Instant Delivery</strong> | 🆕 <strong>Updated Daily</strong>
 </div>
-
----
-
-## 🔥 **Today’s Wizard of Oz Free Coins**  
-*Click any link below - coins auto-add to your account!*
 
 {{< include-md "static/rewards/wizard-of-oz.md" >}}
 
