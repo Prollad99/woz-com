@@ -46,7 +46,7 @@ async function main() {
         }
         return acc;
       }, [])
-      .slice(0, 100);
+      .slice(0, 30);
 
     // Ensure all links have a date
     combinedLinks = combinedLinks.map(link => ({
