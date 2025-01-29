@@ -12,7 +12,7 @@ type: homepage
 description: "🆓 Claim FREE Wizard of Oz coins instantly! Daily-tested links, updated daily. No scams, no surveys!"
 ---
 
-{{% include-md "static/rewards/wizard-of-oz.md" %}}
+{{< include-md "static/rewards/wizard-of-oz.md" >}}
 
 ---
 
