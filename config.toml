@@ -2,6 +2,9 @@ baseURL = "https://www.wizardofozfreecoins.com"
 languageCode = "en-us"
 title = "Wizard of Oz Slots Free Coins"
 
+[params]
+  description = "🆓 Claim FREE Wizard of Oz coins instantly! Daily-tested links, updated daily. No scams, no surveys!"
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.renderer]
