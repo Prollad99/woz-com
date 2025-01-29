@@ -1,74 +1,108 @@
-name: Update Links and Deploy
+name: Automated Content Updates & SEO
 
 on:
   schedule:
-    - cron: '*/30 * * * *' # Runs every 30 minutes
+    - cron: '*/30 * * * *' # Run every 30 minutes
   push:
     branches:
       - main
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  update-links:
+  generate-content:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        game:
+          - coin-master
+          - monopoly-go
+          - bingo-blitz
+          - dice-dreams
+          - match-masters
+          - solitaire-grand-harvest
+          - slotpark
+          - house-of-fun
+          - slotomania
+          - bingo-bash
+          - huuuge-casino
+          - wsop
+          - crazy-coin
 
     steps:
-      - name: Checkout repository
+      - name: Checkout Repository
         uses: actions/checkout@v3
 
-      - name: Install system dependencies
-        run: sudo apt-get update && sudo apt-get install -y jq
+      - name: Install Dependencies
+        run: |
+          npm install
+          npx playwright install
 
-      - name: Cache node modules
-        uses: actions/cache@v3
+      - name: Get Current Date
+        id: date
+        run: echo "CURRENT_DATE=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+
+      - name: Update Game Links
+        run: node index-js/${{ matrix.game }}.js
+
+      - name: Generate SEO Content
+        run: |
+          GAME_NAME=${{ matrix.game }}
+          FORMATTED_NAME=$(echo "$GAME_NAME" | sed 's/-/ /g' | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2)}1')
+
+          echo "### 🎮 $FORMATTED_NAME Kostenlose Belohnungen (Aktualisiert: ${{ env.CURRENT_DATE }}) ..." > "_includes/${GAME_NAME}_post.html"
+          echo "## 🔍 So löst du $FORMATTED_NAME-Belohnungen ein ..." > "_includes/${GAME_NAME}_footer.html"
+
+      - name: Upload Generated Files
+        uses: actions/upload-artifact@v3
         with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          name: ${{ matrix.game }}-seo
+          path: |
+            _includes/${{ matrix.game }}_post.html
+            _includes/${{ matrix.game }}_footer.html
 
-      - name: Install npm packages
-        run: npm install axios cheerio
+  deploy:
+    runs-on: ubuntu-latest
+    needs: generate-content
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  # Ensures full history for rebase
 
-      - name: Fetch and Update Links
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts
+
+      - name: Move Generated Files
         run: |
-          node index-js/wizard-of-oz.js
-          echo "Updated links content:"
-          cat links-json/wizard-of-oz.json
+          find artifacts/ -name '*.html' -exec cp -f {} _includes/ \;
 
-      - name: Generate Reward Page
+      - name: Deploy Changes
+        env: 
+          DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
         run: |
-          # Create/replace the markdown file
-          echo '<ul class="list-group mt-3 mb-4">' > static/rewards/wizard-of-oz.md
-          
-          # Process JSON with jq (now simplified)
-          jq -r '.[] | "  <li class=\"list-group-item d-flex justify-content-between align-items-center\">\n    <span>Wizard of Oz Coins \(.date)</span>\n    <a href=\"\(.href)\" class=\"btn btn-primary btn-sm\">Collect</a>\n  </li>"' \
-            links-json/wizard-of-oz.json >> static/rewards/wizard-of-oz.md
-          
-          echo '</ul>' >> static/rewards/wizard-of-oz.md
-          echo "Generated markdown content:"
-          cat static/rewards/wizard-of-oz.md
+          git config user.email "prolladmail@gmail.com"
+          git config user.name "Auto-Updater"
 
-      - name: Configure Git
-        run: |
-          git config --global user.email "prolladmail@gmail.com"
-          git config --global user.name "Prollad99"
+          # Ensure local branch matches latest origin/main
+          git fetch origin main
+          git reset --hard origin/main
 
-      - name: Commit and Push changes
-        env:
-          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        run: |
-          # Add changes and commit
-          git add static/rewards/wizard-of-oz.md links-json/wizard-of-oz.json
-          git commit -m "Update wizard-of-oz reward links [$(date +'%Y-%m-%d %H:%M')]" || echo "No changes to commit"
+          # Remove artifacts directory to avoid accidental staging
+          rm -rf artifacts/
 
-          # Synchronize with remote
-          git pull --rebase
-          
-          # Push with retry logic
-          max_retries=5
-          for i in $(seq 1 $max_retries); do
-            git push https://x-access-token:$ACTIONS_DEPLOY_KEY@github.com/Prollad99/woz-com.git && break
-            echo "Push attempt $i/$max_retries failed"
-            sleep 5
-            git pull --rebase
-          done
+          # Stage only the intended changes
+          git add _includes/
+
+          # Commit only if changes exist
+          git diff --cached --quiet || git commit -m "Update all game contents"
+
+          # Pull latest changes and rebase (handles race conditions)
+          git pull --rebase origin main
+
+          # Push changes safely
+          git push --force-with-lease https://x-access-token:$DEPLOY_KEY@github.com/Prollad99/bs-de.git HEAD:main
