@@ -12,13 +12,6 @@ type: homepage
 description: "🆓 Claim FREE Wizard of Oz coins instantly! Daily-tested links, updated daily. No scams, no surveys!"
 ---
 
-<div class="text-center">
-🎉 <strong>Last Checked:</strong> {{< datetime "now" "3:04 PM MST" >}}  
-🔒 <strong>100% Safe</strong> | ⚡ <strong>Instant Delivery</strong> | 🆕 <strong>Updated Daily</strong>
-</div>
-
----
-
 ## 🔥 **Today’s Wizard of Oz Free Coins**  
 *Click any link below - coins auto-add to your account!*
 
