@@ -1,5 +1,9 @@
 <ul class="list-group mt-3 mb-4">
   <li class="list-group-item d-flex justify-content-between align-items-center">
+    <span>Wizard of Oz Coins 2025-02-01</span>
+    <a href="https://zynga.social/2d7c4f" class="btn btn-primary btn-sm">Collect</a>
+  </li>
+  <li class="list-group-item d-flex justify-content-between align-items-center">
     <span>Wizard of Oz Coins 2025-01-31</span>
     <a href="https://zynga.social/5afbf7" class="btn btn-primary btn-sm">Collect</a>
   </li>
@@ -114,9 +118,5 @@
   <li class="list-group-item d-flex justify-content-between align-items-center">
     <span>Wizard of Oz Coins 2025-01-28</span>
     <a href="https://zynga.social/ac789f" class="btn btn-primary btn-sm">Collect</a>
-  </li>
-  <li class="list-group-item d-flex justify-content-between align-items-center">
-    <span>Wizard of Oz Coins 2025-01-28</span>
-    <a href="https://zynga.social/no4d" class="btn btn-primary btn-sm">Collect</a>
   </li>
 </ul>
