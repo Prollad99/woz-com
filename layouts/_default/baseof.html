@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Dynamic Title -->
-  <title>{{ .Title }}</title>
-  
-  <!-- Dynamic Description -->
-  <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <title>
+    {{ if eq .RelPermalink "/" }} 
+        {{ .Title | title }} {{ now.Format "January 2006" }}
+    {{ else }}
+        {{ .Title | title }}
+    {{ end }}
+</title>
     <link rel="manifest" href="/manifest.json">
 <script>
     if ('serviceWorker' in navigator) {
